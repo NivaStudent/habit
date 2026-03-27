@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Трекер Привычек</title>
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/public/manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#6366f1">
@@ -155,7 +155,7 @@
     <script>
         // Регистрация Service Worker
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
+            navigator.serviceWorker.register('/public/sw.js')
                 .then(reg => console.log('Service Worker зарегистрирован:', reg))
                 .catch(err => console.log('Ошибка регистрации SW:', err));
         }
