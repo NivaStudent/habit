@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Трекер Привычек</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="app">
+        <header class="app-header">
+            <h1 id="headerTitle">Профиль</h1>
+            <button id="themeToggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
+        <main class="main-content">
+            <!-- Профиль -->
+            <div id="profileTab" class="tab-content active">
+                <div class="profile-container">
+                    <div class="avatar-section">
+                        <div class="avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <button class="edit-avatar-btn" id="editAvatarBtn">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    <div class="info-field">
+                        <label>Имя</label>
+                        <input type="text" id="userName" class="profile-input" placeholder="Ваше имя">
+                    </div>
+                    <div class="info-field">
+                        <label>Email</label>
+                        <input type="email" id="userEmail" class="profile-input" placeholder="Email">
+                    </div>
+                    <div class="info-field">
+                        <label>Цель на день</label>
+                        <input type="text" id="userGoal" class="profile-input" placeholder="Например: Выпить 2 литра воды">
+                    </div>
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <i class="fas fa-calendar-check"></i>
+                            <span id="totalDays">0</span>
+                            <small>дней</small>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-tasks"></i>
+                            <span id="totalHabits">0</span>
+                            <small>привычек</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Заметки -->
+            <div id="notesTab" class="tab-content">
+                <button class="add-note-btn" id="addNoteBtn">
+                    <i class="fas fa-plus"></i> Новая заметка
+                </button>
+                <div id="notesList"></div>
+            </div>
+
+            <!-- Привычки -->
+            <div id="habitsTab" class="tab-content">
+                <button class="add-habit-btn" id="addHabitBtn">
+                    <i class="fas fa-plus"></i> Новая привычка
+                </button>
+                <div id="habitsList"></div>
+            </div>
+
+            <!-- Статистика -->
+            <div id="statsTab" class="tab-content">
+                <div class="stat-box">
+                    <h3>Прогресс привычек</h3>
+                    <canvas id="habitsChart" width="300" height="300"></canvas>
+                </div>
+                <div class="stat-box">
+                    <h3>Активность по дням</h3>
+                    <div id="weeklyStats" class="weekly-stats"></div>
+                </div>
+                <div class="stat-box">
+                    <h3>Всего заметок</h3>
+                    <div class="big-number" id="totalNotes">0</div>
+                </div>
+                <div class="stat-box">
+                    <h3>Выбрать день</h3>
+                    <input type="date" id="datePicker" class="date-picker">
+                    <div id="selectedDayStats" class="selected-day-stats"></div>
+                </div>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <button class="nav-btn active" data-tab="profile">
+                <i class="fas fa-user"></i>
+                <span>Профиль</span>
+            </button>
+            <button class="nav-btn" data-tab="notes">
+                <i class="fas fa-sticky-note"></i>
+                <span>Заметки</span>
+            </button>
+            <button class="nav-btn" data-tab="habits">
+                <i class="fas fa-chart-line"></i>
+                <span>Привычки</span>
+            </button>
+            <button class="nav-btn" data-tab="stats">
+                <i class="fas fa-chart-bar"></i>
+                <span>Статистика</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Модальные окна -->
+    <div id="noteModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="noteModalTitle">Новая заметка</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <input type="text" id="noteTitle" class="modal-input" placeholder="Заголовок">
+            <textarea id="noteContent" class="modal-textarea" rows="5" placeholder="Текст заметки..."></textarea>
+            <button id="saveNoteBtn" class="modal-save-btn">Сохранить</button>
+            <button id="deleteNoteBtn" class="modal-delete-btn hidden">Удалить</button>
+        </div>
+    </div>
+
+    <div id="habitModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Новая привычка</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <input type="text" id="habitName" class="modal-input" placeholder="Название привычки">
+            <select id="habitColor" class="modal-select">
+                <option value="#6366f1">Фиолетовый</option>
+                <option value="#10b981">Зеленый</option>
+                <option value="#ef4444">Красный</option>
+                <option value="#f59e0b">Оранжевый</option>
+                <option value="#06b6d4">Голубой</option>
+                <option value="#ec489a">Розовый</option>
+            </select>
+            <button id="saveHabitBtn" class="modal-save-btn">Сохранить</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Регистрация Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(reg => console.log('Service Worker зарегистрирован:', reg))
+                .catch(err => console.log('Ошибка регистрации SW:', err));
+        }
+    </script>
+</body>
+</html>

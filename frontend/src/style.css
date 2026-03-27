@@ -1,0 +1,427 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #f8fafc;
+    --bg-secondary: white;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --card-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+}
+
+body.dark {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --card-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.app {
+    max-width: 500px;
+    margin: 0 auto;
+    background: var(--bg-primary);
+    min-height: 100vh;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    transition: background 0.3s ease;
+}
+
+.app-header {
+    background: var(--bg-secondary);
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-header h1 {
+    font-size: 24px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-primary);
+    padding: 8px;
+}
+
+.main-content {
+    padding: 20px;
+    padding-bottom: 80px;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 500px;
+    margin: 0 auto;
+    background: var(--bg-secondary);
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 20px;
+    border-top: 1px solid var(--border-color);
+    z-index: 100;
+}
+
+.nav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.nav-btn i {
+    font-size: 22px;
+}
+
+.nav-btn.active {
+    color: var(--accent);
+}
+
+.profile-container {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+}
+
+.avatar i {
+    font-size: 100px;
+    color: var(--accent);
+}
+
+.avatar-section {
+    text-align: center;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.edit-avatar-btn {
+    position: absolute;
+    bottom: 0;
+    right: 40%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.info-field {
+    margin-bottom: 20px;
+}
+
+.info-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.profile-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 16px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.profile-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.stats-cards {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.stat-card {
+    flex: 1;
+    background: var(--bg-primary);
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.stat-card i {
+    font-size: 24px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.stat-card span {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-primary);
+    display: block;
+}
+
+.stat-card small {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.add-note-btn, .add-habit-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.note-card, .habit-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--card-shadow);
+    cursor: pointer;
+}
+
+.note-info, .habit-info {
+    flex: 1;
+}
+
+.note-title, .habit-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+
+.note-preview {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.habit-stats {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.check-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    background: var(--bg-secondary);
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0 8px;
+    color: var(--text-primary);
+}
+
+.check-btn.completed {
+    background: #10b981;
+    border-color: #10b981;
+    color: white;
+}
+
+.delete-note-btn, .delete-habit-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #ef4444;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.close-modal {
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+
+.modal-input, .modal-textarea, .modal-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.modal-save-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.modal-delete-btn {
+    width: 100%;
+    padding: 12px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.stat-box {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.stat-box h3 {
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.big-number {
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.weekly-stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 8px;
+}
+
+.weekly-day {
+    flex: 1;
+    text-align: center;
+}
+
+.day-bar {
+    background: var(--border-color);
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.day-fill {
+    background: var(--accent);
+    width: 100%;
+    transition: height 0.3s ease;
+}
+
+.day-label {
+    font-size: 12px;
+    margin-top: 8px;
+    color: var(--text-secondary);
+}
+
+.date-picker {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.selected-day-stats {
+    text-align: left;
+    margin-top: 16px;
+}
+
+.selected-day-stats .habit-item {
+    padding: 8px;
+    margin: 4px 0;
+    border-radius: 8px;
+    background: var(--bg-primary);
+    display: flex;
+    justify-content: space-between;
+}
